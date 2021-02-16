@@ -1,15 +1,19 @@
 package scenarios;
 
+import dto.NativeTestDataDto;
 import org.testng.annotations.Test;
 import setup.BaseTest;
+import setup.NativeTestData;
 
 public class nativeMobileTests extends BaseTest {
 
-    @Test(groups = {"native"}, description = "This simple test just click on the Sign In button")
-    public void simpleNativeTest() throws IllegalAccessException, NoSuchFieldException, InstantiationException {
-        getPo().getWelement("signInBtn").click();
-        System.out.println("Simplest Android native test done");
-
+    @Test(groups = {"native"}, description = "This test registers a new account and then signs in",
+            dataProvider = "nativeTestDataProvider", dataProviderClass = NativeTestData.class)
+    public void registerAndSignInTest(Object testData) throws InterruptedException {
+        NativeTestDataDto data = (NativeTestDataDto) testData;
+        pageActions().register(data.getEmail(), data.getUsername(), data.getPassword());
+        pageActions().logIn(data.getEmail(), data.getPassword());
+        assertion.assertEquals(pageActions().getPageTitle(), data.getExpectedBudgetPageTitle());
     }
 
 }
