@@ -10,9 +10,6 @@ import setup.Property;
 
 public abstract class AbstractPageObject implements IPageObject {
 
-    /*Object somePageObject; // it should be set of web page or EPAM Test App WebElements
-    //Object somePageActions;*/
-
     private AppiumDriver appiumDriver;
     public final String packageName = "platkovsky.alexey.epamtestapp:";
     private final String webUrl = new Property().getDomain();
@@ -23,15 +20,6 @@ public abstract class AbstractPageObject implements IPageObject {
         this.wait = new WebDriverWait(appiumDriver, 5);
         PageFactory.initElements( new AppiumFieldDecorator(appiumDriver), this);
     }
-
-    /*@Override
-    public WebElement getWelement(String weName) throws NoSuchFieldException, IllegalAccessException {
-        // use reflection technique
-        Field field = somePageObject.getClass().getDeclaredField(weName);
-        field.setAccessible(true);
-        return (WebElement) field.get(somePageObject);
-
-    }*/
 
     @Override
     public String getWelementText(WebElement webElement) {
