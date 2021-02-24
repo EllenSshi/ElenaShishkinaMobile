@@ -9,11 +9,11 @@ public class nativeMobileTests extends BaseTest {
 
     @Test(groups = {"native"}, description = "This test registers a new account and then signs in",
             dataProvider = "nativeTestDataProvider", dataProviderClass = NativeTestData.class)
-    public void registerAndSignInTest(Object testData) throws InterruptedException {
+    public void registerAndSignInTest(Object testData) {
         NativeTestDataDto data = (NativeTestDataDto) testData;
-        pageActions().register(data.getEmail(), data.getUsername(), data.getPassword());
-        pageActions().logIn(data.getEmail(), data.getPassword());
-        assertion.assertEquals(pageActions().getPageTitle(), data.getExpectedBudgetPageTitle());
+        nativePageActions().register(data.getEmail(), data.getUsername(), data.getPassword());
+        nativePageActions().logIn(data.getEmail(), data.getPassword());
+        assertion.assertEquals(nativePageActions().getPageTitle(), data.getExpectedBudgetPageTitle());
     }
 
 }

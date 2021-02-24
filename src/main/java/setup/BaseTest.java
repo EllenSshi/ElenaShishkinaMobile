@@ -4,7 +4,9 @@ import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.asserts.Assertion;
 import org.testng.annotations.*;
+import pageActions.NativePageActions;
 import pageActions.PageActions;
+import pageActions.WebPageActions;
 
 import java.io.File;
 import java.net.MalformedURLException;
@@ -14,14 +16,19 @@ import java.util.concurrent.TimeUnit;
 public class BaseTest implements IDriver {
 
     private static AppiumDriver appiumDriver;
-    static IPageActions pa;
+    static WebPageActions wpa;
+    static NativePageActions npa;
     public static Assertion assertion = new Assertion();
 
     @Override
     public AppiumDriver getDriver() { return appiumDriver; }
 
-    public IPageActions pageActions() {
-        return pa;
+    public NativePageActions nativePageActions() {
+        return npa;
+    }
+
+    public WebPageActions webPageActions() {
+        return wpa;
     }
 
     @Parameters({"platformName","appType","deviceName","browserName","app"})
@@ -62,8 +69,13 @@ public class BaseTest implements IDriver {
     }
 
     private void setPageActions(String appType, AppiumDriver appiumDriver) throws Exception {
-        pa = new PageActions(appType, appiumDriver);
+        switch (appType) {
+            case "web":
+                wpa = new PageActions(appType, appiumDriver).getWebPageActions();
+                break;
+            case "native":
+                npa = new PageActions(appType, appiumDriver).getNativePageActions();
+                break;
+        }
     }
-
-
 }
