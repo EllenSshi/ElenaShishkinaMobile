@@ -11,7 +11,7 @@ import java.util.List;
 public class GoogleSearchPageObject extends AbstractPageObject {
 
     @FindBy(xpath = "//input[@name='q']")
-    private WebElement searchFld;
+    public WebElement searchFld;
 
     @FindBy(xpath = "//div[@id='rso']/div")
     private List<WebElement> searchResults;

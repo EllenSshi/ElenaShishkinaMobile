@@ -14,6 +14,6 @@ public interface IPageObject {
 
     void open();
 
-    void pressEnterKey();
+    void pressEnterKey(WebElement webElement);
 
 }

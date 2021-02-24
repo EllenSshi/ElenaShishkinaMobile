@@ -2,6 +2,7 @@ package pageObjects;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -37,8 +38,9 @@ public abstract class AbstractPageObject implements IPageObject {
     }
 
     @Override
-    public void pressEnterKey() {
-        appiumDriver.getKeyboard().pressKey("\n");
+    public void pressEnterKey(WebElement webElement) {
+        webElement.sendKeys(Keys.ENTER);
+        //appiumDriver.getKeyboard().pressKey("\n");
     }
 
     @Override

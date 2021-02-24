@@ -20,7 +20,7 @@ public class WebPageActions {
 
     public void searchTextInGoogleSearch(String text) {
         googleSearchPageObject.fillSearchFld(text);
-        googleSearchPageObject.pressEnterKey();
+        googleSearchPageObject.pressEnterKey(googleSearchPageObject.searchFld);
     }
 
     public Integer getSearchResultsCount() {

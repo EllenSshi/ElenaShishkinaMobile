@@ -13,7 +13,7 @@ public class nativeMobileTests extends BaseTest {
         NativeTestDataDto data = (NativeTestDataDto) testData;
         nativePageActions().register(data.getEmail(), data.getUsername(), data.getPassword());
         nativePageActions().logIn(data.getEmail(), data.getPassword());
-        assertion.assertEquals(nativePageActions().getPageTitle(), data.getExpectedBudgetPageTitle());
+        assertion.assertTrue(nativePageActions().getPageTitle().contains(data.getExpectedBudgetPageTitle()));
     }
 
 }
