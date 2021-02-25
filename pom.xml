@@ -9,7 +9,7 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <token></token>
+        <token>${token}</token>
         <ts.appium>https://EPM-TSTF:${token}@mobilecloud.epam.com/wd/hub</ts.appium>
     </properties>
 
@@ -103,7 +103,25 @@
                 <suite.file>./src/test/resources/cloudNativeAndroid.xml</suite.file>
             </properties>
         </profile>
+
+        <profile>
+            <id>cloudWebIos</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <suite.file>./src/test/resources/cloudWebIos.xml</suite.file>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>cloudNativeIos</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <suite.file>./src/test/resources/cloudNativeIos.xml</suite.file>
+            </properties>
+        </profile>
     </profiles>
-
-
 </project>
