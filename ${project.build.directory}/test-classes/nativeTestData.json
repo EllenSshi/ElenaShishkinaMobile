@@ -1,0 +1,8 @@
+[
+  {
+    "email": "test@test.com",
+    "username": "test",
+    "password": "12345678",
+    "expectedBudgetPageTitle": "Budget"
+  }
+]
