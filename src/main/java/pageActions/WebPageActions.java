@@ -9,9 +9,9 @@ public class WebPageActions {
 
     private final AppiumDriver appiumDriver;
 
-    public WebPageActions(AppiumDriver appiumDriver) throws Exception {
+    public WebPageActions(String platformName, AppiumDriver appiumDriver) throws Exception {
         this.appiumDriver = appiumDriver;
-        googleSearchPageObject = new GoogleSearchPageObject(appiumDriver);
+        googleSearchPageObject = new GoogleSearchPageObject(platformName, appiumDriver);
     }
 
     public void openGoogleSearchPage() {
@@ -20,7 +20,7 @@ public class WebPageActions {
 
     public void searchTextInGoogleSearch(String text) {
         googleSearchPageObject.fillSearchFld(text);
-        googleSearchPageObject.pressEnterKey();
+        googleSearchPageObject.pressEnterKey(googleSearchPageObject.searchFld);
     }
 
     public Integer getSearchResultsCount() {

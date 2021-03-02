@@ -31,12 +31,21 @@ public class BaseTest implements IDriver {
         return wpa;
     }
 
-    @Parameters({"platformName","appType","deviceName","browserName","app"})
+    @Parameters({"platformName","appType","deviceName","udid", "browserName","app", "appPackage", "appActivity", "bundleId"})
     @BeforeSuite(alwaysRun = true)
-    public void setUp(String platformName, String appType, String deviceName, @Optional("") String browserName, @Optional("") String app) throws Exception {
-        System.out.println("Before: app type - "+appType);
-        setAppiumDriver(platformName, deviceName, browserName, app);
-        setPageActions(appType, appiumDriver);
+    public void setUp(String platformName,
+                      String appType,
+                      @Optional("") String deviceName,
+                      @Optional("") String udid,
+                      @Optional("") String browserName,
+                      @Optional("") String app,
+                      @Optional("") String appPackage,
+                      @Optional("") String appActivity,
+                      @Optional("") String bundleId
+    ) throws Exception {
+        System.out.println("Before: app type - " + appType);
+        setAppiumDriver(platformName, deviceName, udid, browserName, app, appPackage, appActivity, bundleId);
+        setPageActions(platformName, appType, appiumDriver);
 
     }
 
@@ -46,16 +55,25 @@ public class BaseTest implements IDriver {
         appiumDriver.closeApp();
     }
 
-    private void setAppiumDriver(String platformName, String deviceName, String browserName, String app){
+    private void setAppiumDriver(String platformName, String deviceName, String udid, String browserName, String app,
+                                 String appPackage, String appActivity, String bundleId){
         DesiredCapabilities capabilities = new DesiredCapabilities();
         //mandatory Android capabilities
         capabilities.setCapability("platformName",platformName);
         capabilities.setCapability("deviceName",deviceName);
+        capabilities.setCapability("udid",udid);
 
         if(app.endsWith(".apk")) capabilities.setCapability("app", (new File(app)).getAbsolutePath());
 
         capabilities.setCapability("browserName", browserName);
         capabilities.setCapability("chromedriverDisableBuildCheck","true");
+
+        // Capabilities for test of Android native app on Epam Mobile Cloud
+        capabilities.setCapability("appPackage", appPackage);
+        capabilities.setCapability("appActivity", appActivity);
+
+        // Capabilities for test of iOS native app on Epam Mobile Cloud
+        capabilities.setCapability("bundleId", bundleId);
 
         try {
             appiumDriver = new AppiumDriver(new URL(System.getProperty("ts.appium")), capabilities);
@@ -68,13 +86,13 @@ public class BaseTest implements IDriver {
 
     }
 
-    private void setPageActions(String appType, AppiumDriver appiumDriver) throws Exception {
+    private void setPageActions(String platformName, String appType, AppiumDriver appiumDriver) throws Exception {
         switch (appType) {
             case "web":
-                wpa = new PageActions(appType, appiumDriver).getWebPageActions();
+                wpa = new PageActions(platformName, appType, appiumDriver).getWebPageActions();
                 break;
             case "native":
-                npa = new PageActions(appType, appiumDriver).getNativePageActions();
+                npa = new PageActions(platformName, appType, appiumDriver).getNativePageActions();
                 break;
         }
     }

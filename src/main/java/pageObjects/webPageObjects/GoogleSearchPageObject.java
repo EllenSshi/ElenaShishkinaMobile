@@ -1,6 +1,7 @@
 package pageObjects.webPageObjects;
 
 import io.appium.java_client.AppiumDriver;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -11,13 +12,13 @@ import java.util.List;
 public class GoogleSearchPageObject extends AbstractPageObject {
 
     @FindBy(xpath = "//input[@name='q']")
-    private WebElement searchFld;
+    public WebElement searchFld;
 
     @FindBy(xpath = "//div[@id='rso']/div")
     private List<WebElement> searchResults;
 
-    public GoogleSearchPageObject(AppiumDriver appiumDriver) throws Exception {
-        super(appiumDriver);
+    public GoogleSearchPageObject(String platformName, AppiumDriver appiumDriver) throws Exception {
+        super(platformName, appiumDriver);
         PageFactory.initElements(appiumDriver, this);
     }
 
@@ -26,6 +27,10 @@ public class GoogleSearchPageObject extends AbstractPageObject {
     }
 
     public List<WebElement> getSearchResults() {
+        wait.until(
+                wd -> ((JavascriptExecutor) wd)
+                        .executeScript("return document.readyState").equals("complete")
+        );
         return searchResults;
     }
 }
