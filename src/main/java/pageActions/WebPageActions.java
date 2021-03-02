@@ -9,9 +9,9 @@ public class WebPageActions {
 
     private final AppiumDriver appiumDriver;
 
-    public WebPageActions(AppiumDriver appiumDriver) throws Exception {
+    public WebPageActions(String platformName, AppiumDriver appiumDriver) throws Exception {
         this.appiumDriver = appiumDriver;
-        googleSearchPageObject = new GoogleSearchPageObject(appiumDriver);
+        googleSearchPageObject = new GoogleSearchPageObject(platformName, appiumDriver);
     }
 
     public void openGoogleSearchPage() {

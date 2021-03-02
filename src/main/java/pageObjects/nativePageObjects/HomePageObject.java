@@ -26,8 +26,8 @@ public class HomePageObject extends AbstractPageObject {
     @AndroidFindBy(id = packageName + "id/login_pwd")
     private WebElement passwordFld;
 
-    public HomePageObject(AppiumDriver appiumDriver) throws Exception {
-        super(appiumDriver);
+    public HomePageObject(String platformName, AppiumDriver appiumDriver) throws Exception {
+        super(platformName, appiumDriver);
         PageFactory.initElements( new AppiumFieldDecorator(appiumDriver), this);
     }
 

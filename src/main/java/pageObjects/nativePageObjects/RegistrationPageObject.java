@@ -33,8 +33,8 @@ public class RegistrationPageObject extends AbstractPageObject {
     @AndroidFindBy(id = packageName + "id/registration_cancel_button")
     private WebElement cancelBtn;
 
-    public RegistrationPageObject(AppiumDriver appiumDriver) throws Exception {
-        super(appiumDriver);
+    public RegistrationPageObject(String platformName, AppiumDriver appiumDriver) throws Exception {
+        super(platformName, appiumDriver);
         PageFactory.initElements( new AppiumFieldDecorator(appiumDriver), this);
     }
 

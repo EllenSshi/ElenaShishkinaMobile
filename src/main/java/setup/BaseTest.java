@@ -43,9 +43,9 @@ public class BaseTest implements IDriver {
                       @Optional("") String appActivity,
                       @Optional("") String bundleId
     ) throws Exception {
-        System.out.println("Before: app type - "+appType);
+        System.out.println("Before: app type - " + appType);
         setAppiumDriver(platformName, deviceName, udid, browserName, app, appPackage, appActivity, bundleId);
-        setPageActions(appType, appiumDriver);
+        setPageActions(platformName, appType, appiumDriver);
 
     }
 
@@ -86,13 +86,13 @@ public class BaseTest implements IDriver {
 
     }
 
-    private void setPageActions(String appType, AppiumDriver appiumDriver) throws Exception {
+    private void setPageActions(String platformName, String appType, AppiumDriver appiumDriver) throws Exception {
         switch (appType) {
             case "web":
-                wpa = new PageActions(appType, appiumDriver).getWebPageActions();
+                wpa = new PageActions(platformName, appType, appiumDriver).getWebPageActions();
                 break;
             case "native":
-                npa = new PageActions(appType, appiumDriver).getNativePageActions();
+                npa = new PageActions(platformName, appType, appiumDriver).getNativePageActions();
                 break;
         }
     }

@@ -9,16 +9,16 @@ public class PageActions {
 
     private final AppiumDriver appiumDriver;
 
-    public PageActions(String appType, AppiumDriver appiumDriver) throws Exception {
+    public PageActions(String platformName, String appType, AppiumDriver appiumDriver) throws Exception {
         this.appiumDriver = appiumDriver;
 
         System.out.println("Current app type: "+appType);
         switch(appType){
             case "web":
-                webPageActions = new WebPageActions(appiumDriver);
+                webPageActions = new WebPageActions(platformName, appiumDriver);
                 break;
             case "native":
-                nativePageActions = new NativePageActions(appiumDriver);
+                nativePageActions = new NativePageActions(platformName, appiumDriver);
                 break;
             default: throw new Exception("Can't create a page object for "+appType);
         }

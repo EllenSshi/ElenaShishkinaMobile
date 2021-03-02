@@ -17,8 +17,8 @@ public class BudgetActivityPageObject extends AbstractPageObject {
             "android.view.ViewGroup/android.widget.TextView")
     WebElement budgetPageTitle;
 
-    public BudgetActivityPageObject(AppiumDriver appiumDriver) throws Exception {
-        super(appiumDriver);
+    public BudgetActivityPageObject(String platformName, AppiumDriver appiumDriver) throws Exception {
+        super(platformName, appiumDriver);
         PageFactory.initElements( new AppiumFieldDecorator(appiumDriver), this);
     }
 

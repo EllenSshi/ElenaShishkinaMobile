@@ -17,8 +17,8 @@ public class GoogleSearchPageObject extends AbstractPageObject {
     @FindBy(xpath = "//div[@id='rso']/div")
     private List<WebElement> searchResults;
 
-    public GoogleSearchPageObject(AppiumDriver appiumDriver) throws Exception {
-        super(appiumDriver);
+    public GoogleSearchPageObject(String platformName, AppiumDriver appiumDriver) throws Exception {
+        super(platformName, appiumDriver);
         PageFactory.initElements(appiumDriver, this);
     }
 

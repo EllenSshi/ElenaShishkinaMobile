@@ -14,11 +14,11 @@ public class NativePageActions {
     private final AppiumDriver appiumDriver;
 
 
-    public NativePageActions(AppiumDriver appiumDriver) throws Exception {
+    public NativePageActions(String platformName, AppiumDriver appiumDriver) throws Exception {
         this.appiumDriver = appiumDriver;
-        homePageObject = new HomePageObject(appiumDriver);
-        registrationPageObject = new RegistrationPageObject(appiumDriver);
-        budgetActivityPageObject = new BudgetActivityPageObject(appiumDriver);
+        homePageObject = new HomePageObject(platformName, appiumDriver);
+        registrationPageObject = new RegistrationPageObject(platformName, appiumDriver);
+        budgetActivityPageObject = new BudgetActivityPageObject(platformName, appiumDriver);
     }
 
     public void logIn(String username, String password) {
