@@ -1,6 +1,7 @@
 package pageObjects.webPageObjects;
 
 import io.appium.java_client.AppiumDriver;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -26,6 +27,10 @@ public class GoogleSearchPageObject extends AbstractPageObject {
     }
 
     public List<WebElement> getSearchResults() {
+        wait.until(
+                wd -> ((JavascriptExecutor) wd)
+                        .executeScript("return document.readyState").equals("complete")
+        );
         return searchResults;
     }
 }
